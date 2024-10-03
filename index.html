@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- import  links  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1 class="header-h">BookMarker</h1>
+    </div>
+    <div class="container">
+      <h2>
+        <i class="fa-solid fa-bookmark"></i> BookMark Your favorite sites
+        <i class="fa-solid fa-bookmark"></i>
+      </h2>
+      <form>
+        <div class="input">
+          <label for="siteName"><i class="fa-solid fa-book"></i>siteName</label>
+          <input
+            autocomplete="off"
+            type="text"
+            id="siteName"
+            name="siteName"
+            placeholder="BookMark Name"
+          />
+          <i class="fa-solid fa-check hide-1"></i>
+          <i class="fa-solid fa-circle-xmark hide-2"></i>
+        </div>
+        <div class="input">
+          <label for="websiteUrl"><i class="fa-solid fa-copy"></i> website Url</label>
+          <input
+            autocomplete="off"
+            type="text"
+            id="websiteUrl"
+            name="websiteUrl"
+            placeholder="website Url"
+          />
+          <i class="fa-solid fa-check hide-1"></i>
+          <i class="fa-solid fa-circle-xmark hide-2"></i>
+        </div>
+        <div class="btn">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>index</th>
+          <th>website Name</th>
+          <th>visit</th>
+          <th>Update</th>
+          <th>delete</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- const Swal = require('sweetalert2') -->
+    <!-- <script src="sweetalert2.all.min.js"></script> -->
+    <script src="main.js"></script>
+  </body>
+</html>
