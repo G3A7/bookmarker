@@ -1,9 +1,11 @@
 // localStorage.clear();
-
+let filteration = document.querySelectorAll(".filteration button");
 let inputTxt = document.querySelector('[name="siteName"]');
 const table = document.querySelector("table tbody");
 // console.log(table);
 let inputUrl = document.querySelector('[name="websiteUrl"]');
+let inputFav = document.querySelector('[type="checkbox"]');
+// console.log(inputFav);
 let arr = [];
 let initialize = 0;
 let flag = 0;
@@ -34,6 +36,16 @@ if (localStorage.data) {
   initialize = 0;
 }
 
+inputFav.parentElement.querySelector("label").addEventListener("click", (e) => {
+  if (inputFav.value == "false") {
+    e.target.querySelector("i").classList.add("checked");
+    inputFav.value = true;
+  } else {
+    e.target.querySelector("i").classList.remove("checked");
+    inputFav.value = false;
+  }
+  // console.log(inputFav);
+});
 inputTxt.addEventListener("input", (e) => {
   if (!/^[\w\s]{3,15}$/.test(inputTxt.value)) {
     inputTxt.classList.remove("correct");
@@ -98,8 +110,13 @@ document.forms[0].addEventListener("submit", (e) => {
         return e.idx != flag;
       });
     }
-    arr.push({ name: inputTxt.value, url: inputUrl.value, idx: ++initialize });
-    // console.log(arr);
+    console.log(inputFav.value);
+    arr.push({
+      name: inputTxt.value,
+      url: inputUrl.value,
+      favorite: inputFav.value,
+      idx: ++initialize,
+    });
     localStorage.setItem("data", JSON.stringify(arr));
     table.innerHTML = "";
     arr.forEach((e, index) => {
@@ -128,6 +145,8 @@ document.forms[0].addEventListener("submit", (e) => {
     inputTxt.parentElement.querySelector(".hide-1").classList.remove("correct");
     inputTxt.value = "";
     inputUrl.value = "";
+    inputFav.checked = false;
+    inputFav.parentElement.querySelector("label i").classList.remove("checked");
   } else {
     Swal.fire({
       icon: "error",
@@ -142,6 +161,59 @@ document.forms[0].addEventListener("submit", (e) => {
   }
 });
 
+// ------------------------------------------------------
+filteration.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    table.innerHTML = "";
+    if (e.target.dataset.fav_all == "fav") {
+      const arrFilter = arr.filter((site) => {
+        return site.favorite == "true";
+      });
+      arrFilter.forEach((e, index) => {
+        table.innerHTML += `
+            <tr>
+            <td>${index + 1}</td>
+            <td>${e.name}</td>
+            <td>
+            <a href=${e.url} target="_blank"><i class="fa-solid fa-eye"></i>Visit</a>
+            </td>
+            <td>
+               <a data-id=${
+                 e.idx
+               }-UPDATE href="#"><i class="fa-solid fa-pen-to-square"></i>Update</a>
+             </td>
+            <td>
+            <a data-id=${e.idx}-DELETE href="#"><i class="fa-solid fa-trash"></i>Delete</a>
+            </td>
+            </tr>
+            `;
+      });
+    } else if (e.target.dataset.fav_all == "all") {
+      console.log("all");
+      arr.forEach((e, index) => {
+        table.innerHTML += `
+            <tr>
+            <td>${index + 1}</td>
+            <td>${e.name}</td>
+            <td>
+            <a href=${e.url} target="_blank"><i class="fa-solid fa-eye"></i>Visit</a>
+            </td>
+            <td>
+               <a data-id=${
+                 e.idx
+               }-UPDATE href="#"><i class="fa-solid fa-pen-to-square"></i>Update</a>
+             </td>
+            <td>
+            <a data-id=${e.idx}-DELETE href="#"><i class="fa-solid fa-trash"></i>Delete</a>
+            </td>
+            </tr>
+            `;
+      });
+    }
+  });
+});
+// -----------------------------------------------------
+
 table.addEventListener("click", (el) => {
   // if(el.target.dataset);
   // console.log(el.target.dataset.id);
@@ -155,6 +227,18 @@ table.addEventListener("click", (el) => {
       console.log(ansVal);
       inputTxt.value = ansVal.name;
       inputUrl.value = ansVal.url;
+      if (ansVal.favorite == "true") {
+        console.log("true");
+        inputFav.parentElement.querySelector("label i").classList.add("checked"); // Add the class for styling
+        inputFav.value = true;
+
+        inputFav.checked = true; // Set the checkbox as checked
+      } else {
+        inputFav.parentElement.querySelector("label i").classList.remove("checked"); // Remove the class
+        inputFav.value = false;
+        inputFav.checked = false; // Set the checkbox as unchecked
+      }
+      // inputFav.setAttribute("checked");
       inputUrl.classList.add("correct");
       inputUrl.parentElement.querySelector(".hide-1").classList.add("correct");
       inputTxt.classList.add("correct");
@@ -175,7 +259,9 @@ table.addEventListener("click", (el) => {
             <a href=${e.url} target="_blank"><i class="fa-solid fa-eye"></i>Visit</a>
             </td>
             <td>
-               <a data-id=${e.idx}-UPDATE href="#"><i class="fa-solid fa-pen-to-square"></i>Update</a>
+               <a data-id=${
+                 e.idx
+               }-UPDATE href="#"><i class="fa-solid fa-pen-to-square"></i>Update</a>
              </td>
             <td>
             <a data-id=${e.idx}-DELETE href="#"><i class="fa-solid fa-trash"></i>Delete</a>

@@ -122,7 +122,60 @@ form .btn button {
   letter-spacing: 2px;
   cursor: pointer;
 }
-
+.select-favorite > label {
+  font-size: 25px;
+  cursor: pointer;
+}
+.select-favorite > label > i {
+  color: #eee;
+  cursor: pointer;
+}
+.select-favorite > label > i.checked {
+  color: red;
+  font-size: 25px;
+}
+.hide-inp-radio {
+  display: none;
+}
+.filteration {
+  /* background-color: red; */
+  margin: 50px auto;
+  padding: 10px;
+  width: 250px;
+  text-align: center;
+}
+.filteration button {
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  font-size: 17px;
+  z-index: 1;
+}
+.filteration button:hover {
+  color: #fff;
+}
+.filteration button:nth-child(1) {
+  margin-right: 10px;
+}
+.filteration button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 10px;
+  width: 0;
+  height: 100%;
+  z-index: -1;
+  transition: background-color 1s, width 1s;
+}
+.filteration button:hover::after {
+  width: 100%;
+  background-color: rgba(128, 0, 128, 0.816);
+}
 table {
   width: 60%;
   margin: 20px auto;
