@@ -37,15 +37,38 @@ if (localStorage.data) {
 }
 
 inputFav.parentElement.querySelector("label").addEventListener("click", (e) => {
-  if (inputFav.value == "false") {
-    e.target.querySelector("i").classList.add("checked");
-    inputFav.value = true;
+  if (e.target.dataset.label == "l") {
+    if (inputFav.value == "false") {
+      e.target.querySelector("i").classList.add("checked");
+      inputFav.value = true;
+    } else {
+      e.target.querySelector("i").classList.remove("checked");
+      inputFav.value = false;
+    }
   } else {
-    e.target.querySelector("i").classList.remove("checked");
-    inputFav.value = false;
+    if (inputFav.value == "false") {
+      e.target.classList.add("checked");
+      inputFav.value = true;
+    } else {
+      e.target.classList.remove("checked");
+      inputFav.value = false;
+    }
   }
-  // console.log(inputFav);
+
+  // console.log(e.target.dataset.label);
 });
+
+// inputFav.parentElement.querySelector("label i").addEventListener("click", (e) => {
+//   if (inputFav.value == "false") {
+//     e.target.classList.add("checked");
+//     inputFav.value = true;
+//   } else {
+//     e.target.classList.remove("checked");
+//     inputFav.value = false;
+//   }
+// console.log(inputFav);
+// });
+
 inputTxt.addEventListener("input", (e) => {
   if (!/^[\w\s]{3,15}$/.test(inputTxt.value)) {
     inputTxt.classList.remove("correct");
@@ -146,6 +169,7 @@ document.forms[0].addEventListener("submit", (e) => {
     inputTxt.value = "";
     inputUrl.value = "";
     inputFav.checked = false;
+    inputFav.value=false;
     inputFav.parentElement.querySelector("label i").classList.remove("checked");
   } else {
     Swal.fire({
@@ -156,6 +180,9 @@ document.forms[0].addEventListener("submit", (e) => {
       <li>Website must be (https://www.example.com) </li>
       
       </ul>`,
+      customClass: {
+        popup: 'custom-width', // Class name to modify the width
+      }
       // footer: '<a href="#">Why do I have this issue?</a>',
     });
   }

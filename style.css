@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 ul {
   list-style-type: none;
   counter-reset: count;
@@ -11,6 +12,7 @@ li {
   margin-bottom: 20px;
   color: red;
   position: relative;
+  /* font-family: "Roboto", sans-serif; */
 }
 li::after {
   content: counter(count);
@@ -26,7 +28,7 @@ li::after {
 }
 
 body {
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-family: "Roboto", sans-serif;
 }
 .header {
   width: 60%;
@@ -121,6 +123,10 @@ form .btn button {
   color: #fff;
   letter-spacing: 2px;
   cursor: pointer;
+  font-family: "Roboto", sans-serif;
+font-size: 20px;
+line-height: 15px;
+font-weight: 400;
 }
 .select-favorite > label {
   font-size: 25px;
@@ -182,6 +188,8 @@ table {
   text-align: center;
   background-color: #eee;
   border-collapse: collapse;
+  margin-bottom: 60px;
+  padding-bottom: 20px;
 }
 table thead th {
   padding: 10px 0;
@@ -220,4 +228,35 @@ table tbody tr td:nth-child(5) a {
   border-radius: 7px;
   color: #fff;
   background-color: red;
+}
+@media all and (max-width: 552px) {
+  .custom-width {
+    width: 350px;
+  }
+  li::after {
+    top: -5px;
+    left: -20px;
+  }
+  table tbody tr td:nth-child(5) a {
+    padding: 5px;
+  }
+  table tbody tr td:nth-child(5) a i {
+    display: none;
+  }
+  table tbody tr td:nth-child(4) a {
+    padding: 5px;
+  }
+  table tbody tr td:nth-child(4) a i {
+    display: none;
+  }
+  table tbody tr td:nth-child(3) a {
+    padding: 5px;
+  }
+  table tbody tr td:nth-child(3) a i {
+    display: none;
+  }
+
+  table thead th {
+    padding: 10px;
+  }
 }
