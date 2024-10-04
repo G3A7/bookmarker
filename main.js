@@ -10,12 +10,16 @@ let arr = [];
 let initialize = 0;
 let flag = 0;
 if (localStorage.data) {
-  console.log(localStorage.data.length);
+  // console.log(localStorage.data.length);
+
   arr = JSON.parse(localStorage.data);
-  initialize = arr[arr.length - 1].idx;
-  table.innerHTML = "";
-  arr.forEach((e, index) => {
-    table.innerHTML += `
+  if (arr.length != 0) {
+    // console.log(arr);
+
+    initialize = arr[arr.length - 1].idx;
+    table.innerHTML = "";
+    arr.forEach((e, index) => {
+      table.innerHTML += `
     <tr>
      <td>${index + 1}</td>
      <td>${e.name}</td>
@@ -30,7 +34,8 @@ if (localStorage.data) {
      </td>
    </tr>
 `;
-  });
+    });
+  }
 } else {
   arr = [];
   initialize = 0;
@@ -169,7 +174,7 @@ document.forms[0].addEventListener("submit", (e) => {
     inputTxt.value = "";
     inputUrl.value = "";
     inputFav.checked = false;
-    inputFav.value=false;
+    inputFav.value = false;
     inputFav.parentElement.querySelector("label i").classList.remove("checked");
   } else {
     Swal.fire({
@@ -181,8 +186,8 @@ document.forms[0].addEventListener("submit", (e) => {
       
       </ul>`,
       customClass: {
-        popup: 'custom-width', // Class name to modify the width
-      }
+        popup: "custom-width", // Class name to modify the width
+      },
       // footer: '<a href="#">Why do I have this issue?</a>',
     });
   }
