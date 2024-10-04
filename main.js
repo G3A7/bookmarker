@@ -87,9 +87,9 @@ inputTxt.addEventListener("input", (e) => {
     inputTxt.parentElement.querySelector(".hide-1").classList.add("correct");
   }
 });
-
+// ^(https:\/\/)([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s]*)?$
 inputUrl.addEventListener("input", (e) => {
-  if (!/^(https:\/\/)([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s]*)?$/.test(inputUrl.value)) {
+  if (!/^https:\/\/www\.[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/.test(inputUrl.value)) {
     inputUrl.classList.add("error");
     inputUrl.classList.remove("correct");
     inputUrl.parentElement.querySelector(".hide-2").classList.add("error");
@@ -120,7 +120,7 @@ document.forms[0].addEventListener("submit", (e) => {
     inputTxt.parentElement.querySelector(".hide-1").classList.add("correct");
   }
 
-  if (!/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s]*)?$/.test(inputUrl.value)) {
+  if (!/^https:\/\/www\.[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/.test(inputUrl.value)) {
     inputUrl.classList.add("error");
     inputUrl.parentElement.querySelector(".hide-2").classList.add("error");
     inputUrl.parentElement.querySelector(".hide-1").classList.remove("correct");
