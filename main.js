@@ -89,7 +89,7 @@ inputTxt.addEventListener("input", (e) => {
 });
 // ^(https:\/\/)([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s]*)?$
 inputUrl.addEventListener("input", (e) => {
-  if (!/^https:\/\/www\.[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/.test(inputUrl.value)) {
+  if (!/^(https:\/\/)([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s]*)?$/.test(inputUrl.value)) {
     inputUrl.classList.add("error");
     inputUrl.classList.remove("correct");
     inputUrl.parentElement.querySelector(".hide-2").classList.add("error");
@@ -120,7 +120,7 @@ document.forms[0].addEventListener("submit", (e) => {
     inputTxt.parentElement.querySelector(".hide-1").classList.add("correct");
   }
 
-  if (!/^https:\/\/www\.[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/.test(inputUrl.value)) {
+  if (!/^(https:\/\/)([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s]*)?$/.test(inputUrl.value)) {
     inputUrl.classList.add("error");
     inputUrl.parentElement.querySelector(".hide-2").classList.add("error");
     inputUrl.parentElement.querySelector(".hide-1").classList.remove("correct");
@@ -201,25 +201,29 @@ filteration.forEach((btn) => {
       const arrFilter = arr.filter((site) => {
         return site.favorite == "true";
       });
-      arrFilter.forEach((e, index) => {
-        table.innerHTML += `
-            <tr>
-            <td>${index + 1}</td>
-            <td>${e.name}</td>
-            <td>
-            <a href=${e.url} target="_blank"><i class="fa-solid fa-eye"></i>Visit</a>
-            </td>
-            <td>
-               <a data-id=${
-                 e.idx
-               }-UPDATE href="#"><i class="fa-solid fa-pen-to-square"></i>Update</a>
-             </td>
-            <td>
-            <a data-id=${e.idx}-DELETE href="#"><i class="fa-solid fa-trash"></i>Delete</a>
-            </td>
-            </tr>
-            `;
-      });
+      if (arrFilter.length == 0) {
+        table.innerHTML = "<p class='p-empty'>NO FAVORITE MAN 😐</p>";
+      } else {
+        arrFilter.forEach((e, index) => {
+          table.innerHTML += `
+              <tr>
+              <td>${index + 1}</td>
+              <td>${e.name}</td>
+              <td>
+              <a href=${e.url} target="_blank"><i class="fa-solid fa-eye"></i>Visit</a>
+              </td>
+              <td>
+                 <a data-id=${
+                   e.idx
+                 }-UPDATE href="#"><i class="fa-solid fa-pen-to-square"></i>Update</a>
+               </td>
+              <td>
+              <a data-id=${e.idx}-DELETE href="#"><i class="fa-solid fa-trash"></i>Delete</a>
+              </td>
+              </tr>
+              `;
+        });
+      }
     } else if (e.target.dataset.fav_all == "all") {
       console.log("all");
       arr.forEach((e, index) => {
