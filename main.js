@@ -139,43 +139,60 @@ document.forms[0].addEventListener("submit", (e) => {
       });
     }
     console.log(inputFav.value);
-    arr.push({
-      name: inputTxt.value,
-      url: inputUrl.value,
-      favorite: inputFav.value,
-      idx: ++initialize,
+    const f = arr.find((e) => {
+      return (e.name == inputTxt.value || e.url == inputUrl.value);
     });
-    localStorage.setItem("data", JSON.stringify(arr));
-    table.innerHTML = "";
-    arr.forEach((e, index) => {
-      table.innerHTML += `
-        <tr>
-         <td>${index + 1}</td>
-         <td>${e.name}</td>
-         <td>
-           <a href=${e.url} target="_blank"><i class="fa-solid fa-eye"></i>Visit</a>
-         </td>
-         <td>
-       <a data-id=${e.idx}-UPDATE href="#"><i class="fa-solid fa-pen-to-square"></i>Update</a>
-     </td>
-         <td>
-           <a data-id=${e.idx}-DELETE href="#"><i class="fa-solid fa-trash"></i>Delete</a>
-         </td>
-       </tr>
-    `;
-    });
+    if (f) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        html: `<ul>
+        <li>Data Already Exists(Possible) </li>
+        </ul>`,
+        customClass: {
+          popup: "custom-width", // Class name to modify the width
+        },
+        // footer: '<a href="#">Why do I have this issue?</a>',
+      });
+    } else {
+      arr.push({
+        name: inputTxt.value,
+        url: inputUrl.value,
+        favorite: inputFav.value,
+        idx: ++initialize,
+      });
+      localStorage.setItem("data", JSON.stringify(arr));
+      table.innerHTML = "";
+      arr.forEach((e, index) => {
+        table.innerHTML += `
+          <tr>
+           <td>${index + 1}</td>
+           <td>${e.name}</td>
+           <td>
+             <a href=${e.url} target="_blank"><i class="fa-solid fa-eye"></i>Visit</a>
+           </td>
+           <td>
+         <a data-id=${e.idx}-UPDATE href="#"><i class="fa-solid fa-pen-to-square"></i>Update</a>
+       </td>
+           <td>
+             <a data-id=${e.idx}-DELETE href="#"><i class="fa-solid fa-trash"></i>Delete</a>
+           </td>
+         </tr>
+      `;
+      });
 
-    inputUrl.classList.remove("correct");
-    inputUrl.parentElement.querySelector(".hide-2").classList.remove("error");
-    inputUrl.parentElement.querySelector(".hide-1").classList.remove("correct");
-    inputTxt.classList.remove("correct");
-    inputTxt.parentElement.querySelector(".hide-2").classList.remove("error");
-    inputTxt.parentElement.querySelector(".hide-1").classList.remove("correct");
-    inputTxt.value = "";
-    inputUrl.value = "";
-    inputFav.checked = false;
-    inputFav.value = false;
-    inputFav.parentElement.querySelector("label i").classList.remove("checked");
+      inputUrl.classList.remove("correct");
+      inputUrl.parentElement.querySelector(".hide-2").classList.remove("error");
+      inputUrl.parentElement.querySelector(".hide-1").classList.remove("correct");
+      inputTxt.classList.remove("correct");
+      inputTxt.parentElement.querySelector(".hide-2").classList.remove("error");
+      inputTxt.parentElement.querySelector(".hide-1").classList.remove("correct");
+      inputTxt.value = "";
+      inputUrl.value = "";
+      inputFav.checked = false;
+      inputFav.value = false;
+      inputFav.parentElement.querySelector("label i").classList.remove("checked");
+    }
   } else {
     Swal.fire({
       icon: "error",
